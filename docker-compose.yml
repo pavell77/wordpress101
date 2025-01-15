@@ -23,11 +23,11 @@ services:
       - "8080:80"
     environment:
       WORDPRESS_DB_HOST: db
-      WORDPRESS_DB_NAME: ${MYSQL_DATABASE} # Имя базы данных из .env
-      WORDPRESS_DB_USER: ${MYSQL_USER} # Имя пользователя БД из .env
-      WORDPRESS_DB_PASSWORD: ${MYSQL_PASSWORD} # Пароль пользователя БД из .env
+      WORDPRESS_DB_NAME: ${MYSQL_DATABASE}
+      WORDPRESS_DB_USER: ${MYSQL_USER}
+      WORDPRESS_DB_PASSWORD: ${MYSQL_PASSWORD}
     volumes:
-      - wordpress_data:/var/www/html
+      - ./wp-content:/var/www/html/wp-content
 
   phpmyadmin:
     depends_on:
