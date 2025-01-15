@@ -1,0 +1,56 @@
+version: "3.9"
+
+services:
+  db:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD} # Пароль root из .env
+      MYSQL_DATABASE: ${MYSQL_DATABASE} # Имя базы данных из .env
+      MYSQL_USER: ${MYSQL_USER} # Имя пользователя БД из .env
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD} # Пароль пользователя БД из .env
+    volumes:
+      - db_data:/var/lib/mysql
+    ports:
+      - "3306:3306" # Проброс порта (опционально)
+
+  wordpress:
+    depends_on:
+      - db
+    image: wordpress:latest
+    restart: always
+    ports:
+      - "8080:80"
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_NAME: ${MYSQL_DATABASE} # Имя базы данных из .env
+      WORDPRESS_DB_USER: ${MYSQL_USER} # Имя пользователя БД из .env
+      WORDPRESS_DB_PASSWORD: ${MYSQL_PASSWORD} # Пароль пользователя БД из .env
+    volumes:
+      - wordpress_data:/var/www/html
+
+  phpmyadmin:
+    depends_on:
+      - db
+    image: phpmyadmin/phpmyadmin
+    restart: always
+    ports:
+      - "8081:80"
+    environment:
+      PMA_HOST: db
+      UPLOAD_MAX_FILESIZE: 100M
+      POST_MAX_SIZE: 100M
+
+  nginx:
+    depends_on:
+      - wordpress
+    image: nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+    restart: always
+
+volumes:
+  db_data:
+  wordpress_data:

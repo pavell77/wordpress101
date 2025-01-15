@@ -1,0 +1,74 @@
+# Файлы операционной системы
+.DS_Store
+Thumbs.db
+
+# Файлы VS Code
+.vscode/
+*.code-workspace
+*.code-profile
+
+# Файлы Node.js (если есть)
+node_modules/
+
+# Файлы Composer (если есть)
+vendor/
+
+# Файлы Docker
+/var/lib/docker/volumes/*
+/wordpress_data
+/db_data
+
+# Файлы .env
+.env
+
+# Логи и временные файлы
+*.log
+tmp/
+temp/
+*.tmp
+*.swp
+*~
+*.bak
+
+# Сборки и вывод
+build/
+dist/
+target/
+out/
+
+# Файлы IDE (IntelliJ IDEA, Eclipse и др.)
+.idea/
+*.iws
+*.ipr
+*.iml
+.project
+.classpath
+.settings/
+
+# Файлы macOS
+.AppleDouble
+.LSOverride
+
+# Файлы Windows
+ehthumbs.db
+Desktop.ini
+
+# Файлы Python (если есть)
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info
+
+# Файлы Java (если есть)
+*.class
+*.jar
+*.war
+*.ear
+
+# Файлы PHP (если есть)
+/composer.lock
+/vendor
+
+# Другие файлы и директории по необходимости
+# Например, файлы конфигурации баз данных, если они не .env
+# config/*.ini
